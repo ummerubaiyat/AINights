@@ -2,7 +2,7 @@
 ## Workshop for Attendees
 
 ## Session Information 
-**Session Title:** Creating applications that can see, hear, speak or understand - using Microsoft Cognitive Services
+**Session Title:** Computer Vision and Text Analytics - Using Azure Cognitive Services
 
 **Session Abstract:** In this workshop you will be introduced to the [Microsoft Azure Cognitive Services](https://azure.microsoft.com/en-gb/services/cognitive-services/?WT.mc_id=ainights-github-amynic), a range of offerings you can use to infuse intelligence and machine learning into your applications without needing to build the code from scratch. 
 We will cover pre-trained AI APIs, such as [computer vision](https://azure.microsoft.com/en-gb/services/cognitive-services/directory/vision/?WT.mc_id=ainights-github-amynic) and [text analytics](https://azure.microsoft.com/en-gb/services/cognitive-services/directory/lang/?WT.mc_id=ainights-github-amynic), that are accessed by REST protocol. Next we will dive into Custom AI that uses transfer learning - [Microsoft Azure Custom Vision](https://azure.microsoft.com/en-gb/services/cognitive-services/custom-vision-service/?WT.mc_id=ainights-github-amynic). This enables you to provide a small amount of your own data to train an image classification model. Wrapping the workshop up by building our custom trained AI into an application - using [Logic Apps](https://azure.microsoft.com/en-gb/services/logic-apps/?WT.mc_id=ainights-github-amynic), this technology is ideal for building data pipeline processes that work with your machine learning models.
@@ -17,13 +17,83 @@ We will cover pre-trained AI APIs, such as [computer vision](https://azure.micro
 
 ## Go to sections:
 
-* **Task 1:** Microsoft Azure Cognitive Services - Custom Vision [Go to Section](#task-1-microsoft-azure-cognitive-services---custom-vision)
-* **Task 2:** Build Custom AI into an Application - Azure Logic Apps [Go to Section](#task-2-build-custom-ai-into-an-application---azure-logic-apps)
+* **Task 1:** Microsoft Azure Cognitive Services - Text Analytics [Go to Section](#task-1-microsoft-azure-cognitive-services---Text-Analytics)
+* **Task 2:** Microsoft Azure Cognitive Services - Custom Vision [Go to Section](#task-2-microsoft-azure-cognitive-services---custom-vision)
+* **Task 3:** Build Custom AI into an Application - Azure Logic Apps [Go to Section](#task-3-build-custom-ai-into-an-application---azure-logic-apps)
 
 > If you find this workshop useful, find further **Bonus Content** **[HERE!](bonus-content.md)**
 
 
-## Task 1: Microsoft Azure Cognitive Services - Custom Vision
+
+## Task 1: Microsoft Azure Cognitive Services - Text Analytics
+
+Now here is an examples of the Text Analytics API but using the REST protocol as you would use to integrate these services into an application
+
+First log into Microsoft Azure to create a Cognitive Services account.
+
+Select **Create a resource** and search **Cognitive Services** and choose Enter. Then select **Create** on the Cognitive Services blade
+
+![Create Cognitive Services Account](/docs-images/cognitive-azure.JPG)
+
+Enter details to create an account:
+
+* **Name:** enter a suitable name for the service (example: ainightscognitive)
+* **Subscription:** Choose a relevant subscription
+* **Location:** Choose your closest Data Center available
+* **Pricing Tier:** S0
+* **Resource Group:** Create new, and provide a sensible name (example ainights)
+* **select the checkbox after reading the terms below**
+* **select 'Create'**
+
+![Cognitive Services Details](/docs-images/cognitive-details.JPG)
+
+Once created, in your notifications select **go to resource**
+![Go to Resource](/docs-images/go-to-resource.JPG)
+
+In the Cognitive Services blade, select **Keys** and copy **KEY 1**
+![Copy Key](/docs-images/keys.JPG)
+
+Now select **Overview** and copy the **Endpoint** variable
+![Copy Endpoint](/docs-images/endpoint.JPG)
+
+Open Postman, API Development environment on your local machine.
+> Find the download in the [Pre-requisites section](#Pre-requisites-for-your-machine)
+
+Select Create a Request
+
+![Create A Request](/docs-images/create-request.JPG)
+
+Enter request details and create a new collection
+
+![Enter Request Details](/docs-images/save-request.JPG)
+
+Select the newly created collection and choose save
+
+![Save Request](/docs-images/save.JPG)
+
+Now create a request to call your text analytics API:
+
+* Change from a GET request to a POST request in the top left
+* Enter your endpoint URL and add ```text/analytics/v2.0/sentiment``` to the end
+* Select Headers underneath the URL box
+* In Key type ```Ocp-Apim-Subscription-Key``` and in Value add your KEY1 value
+* In Key type ```Content-Type``` and in Value type ```application/json```
+* ![Headers and URL](/docs-images/url-and-headers.JPG)
+* Select Body underneath the URL box
+* Select ```raw``` from the radio button options
+* Copy JSON sample from ```sample-code/text-analytics-demo/sentiment-analysis-text.json``` into the box
+* Select the ```Send``` button and review the Response
+* ![Body and Submit REST Request](/docs-images/rest-body.JPG)
+
+You can also try other options from the REST API - such as KeyPhrases function. Change the end of the URL from sentiment to keyPhrases and select send to view the key phrases for the example text.
+
+* ![Key Phrases REST Request](/docs-images/keyphrases.JPG)
+
+> Check out the language support for the Text Analytics API [here](https://docs.microsoft.com/en-gb/azure/cognitive-services/text-analytics/language-support/?WT.mc_id=ainights-github-amynic). If your language is supported please edit the JSON file to translate the text and show the functionality of the API above. There is an example of a French JSON file in ```sample-code/text-analytics-demo/sentiment-analysis-text-fr.json``` please edit this file as appropriate
+> If you have any issues running Postman, API Development Environment you can always run the REST API requests within the API docs for [sentiment analysis](https://northeurope.dev.cognitive.microsoft.com/docs/services/TextAnalytics.V2.0/operations/56f30ceeeda5650db055a3c9/?WT.mc_id=ainights-github-amynic) and [key phrase extraction](https://northeurope.dev.cognitive.microsoft.com/docs/services/TextAnalytics.V2.0/operations/56f30ceeeda5650db055a3c6/?WT.mc_id=ainights-github-amynic). Select the data centre you are using and then enter your key in the box provided along with the sample body sample used in Postman
+
+
+## Task 2: Microsoft Azure Cognitive Services - Custom Vision
 
 Using Microsoft Azure Custom Vision service you can start to build your own personalised image classification and object detection algorithms with very little code. In this exercise we will create a dog-breed classification algorithm using Dog images from the [ImageNet open dataset created by Standford University](http://vision.stanford.edu/aditya86/ImageNetDogs/)
 
@@ -129,7 +199,7 @@ You can now select the **Prediction URL** button to gain all information you nee
 
 **Great work!** you have created your specialised dog classification model using the Azure Custom Vision Service
 
-## Task 2: Build Custom AI into an Application - Azure Logic Apps
+## Task 3: Build Custom AI into an Application - Azure Logic Apps
 
 In this section you will build an Azure Logic App to consume your Custom Vision AI dog classification application
 
