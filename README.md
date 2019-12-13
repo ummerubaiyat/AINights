@@ -26,7 +26,7 @@ We will cover pre-trained AI APIs, such as [computer vision](https://azure.micro
 
 ## Content Walk-through
 
-First show the Microsoft Azure Cognitive Services in their simplest format - within the web browser.
+First start with the Microsoft Azure Cognitive Services in their simplest format - within the web browser.
 **Navigate to [https://azure.microsoft.com/en-gb/services/cognitive-services/](https://azure.microsoft.com/en-gb/services/cognitive-services/?WT.mc_id=ainights-github-amynic)**
 
 To ensure fluidity in your presentation, you can have the page opened in your browser before your session beginsand type in **Azure Cognitive Services** in the search box; it will usually be the first result displayed.
